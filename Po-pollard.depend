@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1460883969 source:d:\codeblock\po-pollard\main.cpp
+	<stdio.h>
+	<assert.h>
+

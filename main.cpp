@@ -1,12 +1,14 @@
 #include <stdio.h>
+#include <iostream>
 #include <assert.h>
 
-long gcd(long a, long b){
+template <typename T>
+T gcd(T a, T b){
     printf("step1\n");
     if(a<0) a=-a;
     if(b<0) b=-b;
 
-    long c = 1;
+    T c = 1;// -> decltype(a+b);
     while((a%2 == 0)&&(b%2 == 0)){
         printf("step2\n");
         a=a>>1;
@@ -31,19 +33,21 @@ long gcd(long a, long b){
     return c*a;
 }
 
-long fx(long x, long a, long c, long modN){
+template <typename T>
+T fx(T x, T a, T c, T modN){
     auto tmp = (a*x*x + c)%modN;
 //    assert(tmp==0); // for tested simple numbers always tmp==0
     return tmp;
 }
 
-long PoPollard(long src){
-    long x1=2, x2=2, a=1, c=1, d=1;
+template <typename T>
+T PoPollard(T src){
+    T x1=2, x2=2, a=1, c=1, d=1;
     while(d==1){
         x1=fx(x1, a, c, src);
-        printf("x1 is:%ld\n",x1);
+        std::cout << "x1 is:" << x1 << "\n";
         x2=fx(fx(x2, a, c, src), a, c, src);
-        printf("x2 is:%ld\n",x2);
+        std::cout << "x2 is:" << x2 << "\n";
 
         if(x2==0) return 1; // looks like when src is simple number f(f(x))==0
 
@@ -54,14 +58,16 @@ long PoPollard(long src){
         }
 
         d=gcd(abs(x1)-abs(x2), src);
-        printf("d is: %ld\n", d);
+        std::cout << "d is:" << d << "\n";
     }
     return src/d;
 }
 
 int main()
 {
+    std::cout << "Hello gcd:" << gcd(256,16) << "\n";
+    std::cout << "Testing Po-Pollard:" << PoPollard(4253) << "\n";
 //    printf("Hello world! %ld\n", gcd(256,16));
-    printf("Testing Po-Pollard: %ld\n", PoPollard(4253));
+//    printf("Testing Po-Pollard: %ld\n", PoPollard(4253));
     return 0;
 }

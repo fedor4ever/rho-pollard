@@ -1,21 +1,19 @@
-#include <stdio.h>
 #include <iostream>
 #include <assert.h>
 
 template <typename T>
 T gcd(T a, T b){
-    printf("step1\n");
+    static_assert(std::is_integral<T>::value, "Only integer types allowed");
     if(a<0) a=-a;
     if(b<0) b=-b;
 
-    T c = 1;// -> decltype(a+b);
+    T c = 1;
     while((a%2 == 0)&&(b%2 == 0)){
-        printf("step2\n");
-        a=a>>1;
-        b=b>>1;
-        c*=2;
+        a>>=1;
+        b>>=1;
+        c<<=1;
     }
-    printf("step3\n");
+
     while(a!=b){
         if(a%b==0)
             return c*b;
@@ -42,12 +40,11 @@ T fx(T x, T a, T c, T modN){
 
 template <typename T>
 T PoPollard(T src){
+    static_assert(std::is_integral<T>::value, "Only integer types allowed");
     T x1=2, x2=2, a=1, c=1, d=1;
     while(d==1){
         x1=fx(x1, a, c, src);
-        std::cout << "x1 is:" << x1 << "\n";
         x2=fx(fx(x2, a, c, src), a, c, src);
-        std::cout << "x2 is:" << x2 << "\n";
 
         if(x2==0) return 1; // looks like when src is simple number f(f(x))==0
 
@@ -58,7 +55,6 @@ T PoPollard(T src){
         }
 
         d=gcd(abs(x1)-abs(x2), src);
-        std::cout << "d is:" << d << "\n";
     }
     return src/d;
 }
@@ -66,8 +62,6 @@ T PoPollard(T src){
 int main()
 {
     std::cout << "Hello gcd:" << gcd(256,16) << "\n";
-    std::cout << "Testing Po-Pollard:" << PoPollard(4253) << "\n";
-//    printf("Hello world! %ld\n", gcd(256,16));
-//    printf("Testing Po-Pollard: %ld\n", PoPollard(4253));
+    std::cout << "Testing Po-Pollard:" << PoPollard(-77) << "\n"; //4253
     return 0;
 }

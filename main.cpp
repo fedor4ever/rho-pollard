@@ -4,8 +4,13 @@
 template <typename T>
 T gcd(T a, T b){
     static_assert(std::is_integral<T>::value, "Only integer types allowed");
+
     if(a<0) a=-a;
     if(b<0) b=-b;
+
+    if(a%b==0) return b;
+    if(b%a==0) return a;
+    if(b==0) return (a>0)? a : -a;
 
     T c = 1;
     while((a%2 == 0)&&(b%2 == 0)){
@@ -15,18 +20,14 @@ T gcd(T a, T b){
     }
 
     while(a!=b){
-        if(a%b==0)
-            return c*b;
-        if(b%a==0)
-            return c*a;
         if(a%2 == 0)
-            a=a>>1;
+            a>>=1;
         if(a>b)
-            a=(a-b);
-        if(b>a)
-            b=(b-a);
+            a-=b;
+        else
+            b-=a;
         if(b%2 == 0)
-            b=b>>1;
+            b>>=1;
     }
     return c*a;
 }

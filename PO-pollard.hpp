@@ -1,6 +1,9 @@
 #ifndef PO_POLLARD_HPP_INCLUDED
 #define PO_POLLARD_HPP_INCLUDED
 
+#include <iostream>
+#include <assert.h>
+
 template <typename T>
 T gcd(T a, T b){
     static_assert(std::is_integral<T>::value, "Only integer types allowed");
@@ -22,12 +25,13 @@ T gcd(T a, T b){
     while(a!=b){
         if(a%2 == 0)
             a>>=1;
-        if(a>b)
-            a-=b;
-        else
-            b-=a;
         if(b%2 == 0)
             b>>=1;
+
+        if(a>b)
+            a-=b;
+        if(b>a)
+            b-=a;
     }
     return c*a;
 }
@@ -55,9 +59,11 @@ T PoPollard(T src){
             continue;
         }
 
-        d=gcd(abs(x1)-abs(x2), src);
+        d=gcd(abs(x1-x2), src);
+        std::cout << "*"; // << d << "\n";
     }
-    return src/d;
+    assert(src%d == 0);
+    return d;
 }
 
 #endif // PO_POLLARD_HPP_INCLUDED

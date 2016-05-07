@@ -47,7 +47,7 @@ template <typename T>
 T PoPollard(T src){
     static_assert(std::is_integral<T>::value, "Only integer types allowed");
     if(src == 0){
-        std::cout << "argument shall not be zero!";
+        std::cout << "argument shall not be zero!\n";
         return -1;
     }
     T x1=2, x2=2, a=1, c=1, d=1;
@@ -64,7 +64,7 @@ T PoPollard(T src){
         }
 
         d=gcd(abs(x1-x2), src);
-        std::cout << "*"; // << d << "\n";
+        std::cout << "*";
     }
     assert(src%d == 0);
     return d;

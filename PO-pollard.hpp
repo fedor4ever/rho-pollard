@@ -46,6 +46,10 @@ T fx(T x, T a, T c, T modN){
 template <typename T>
 T PoPollard(T src){
     static_assert(std::is_integral<T>::value, "Only integer types allowed");
+    if(src == 0){
+        std::cout << "argument shall not be zero!";
+        return -1;
+    }
     T x1=2, x2=2, a=1, c=1, d=1;
     while(d==1){
         x1=fx(x1, a, c, src);

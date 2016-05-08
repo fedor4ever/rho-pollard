@@ -73,6 +73,7 @@ T fx(T x, T a, T c, T modN){
 /** \brief Rho-Pollard algorithm
  *
  * This is rho-Pollard algorithm implementation.
+ * It used to find smallest divisor.
  * \param accepts only integers.
  * \return smallest divisor
  *

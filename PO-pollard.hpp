@@ -1,8 +1,25 @@
 #ifndef PO_POLLARD_HPP_INCLUDED
 #define PO_POLLARD_HPP_INCLUDED
+/** \file PO-pollard.hpp
+ *
+ * \brief rho-Pollard & GCD implementaion
+ *
+ * \author Strizhniou Fiodar
+ * \copyright Creative Commons Attribution-NonCommercial-ShareAlike
+ */
 
 #include <iostream>
 #include <assert.h>
+
+/** \brief Binary GCD algorithm.
+ *
+ * GCD is well-known algorithm named great common divisor.
+ * Implementation binary GCD algorithm.
+ * This function accepts only integers.
+ *
+ * \return always GCD > 0
+ *
+ */
 
 template <typename T>
 T gcd(T a, T b){
@@ -36,12 +53,30 @@ T gcd(T a, T b){
     return c*a;
 }
 
+/** \brief Find polynomial result
+ * Internal component PoPollard(T src).
+ * \param x used to compute polynomial
+ * \param a used to change polynomial computation
+ * \param c used to change polynomial computation
+ * \param modN used to find remainder of division
+ * \return integer
+ *
+ */
+
 template <typename T>
 T fx(T x, T a, T c, T modN){
     auto tmp = (a*x*x + c)%modN;
 //    assert(tmp==0); // for tested simple numbers always tmp==0
     return tmp;
 }
+
+/** \brief Rho-Pollard algorithm
+ *
+ * This is rho-Pollard algorithm implementation.
+ * \param accepts only integers.
+ * \return smallest divisor
+ *
+ */
 
 template <typename T>
 T PoPollard(T src){

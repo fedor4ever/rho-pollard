@@ -4,7 +4,12 @@
 	<assert.h>
 	"PO-pollard.hpp"
 
-1462621891 d:\codeblock\po-pollard\po-pollard.hpp
+1462621961 d:\codeblock\po-pollard\po-pollard.hpp
 	<iostream>
 	<assert.h>
+
+1462621680 source:d:\codeblock\po-pollard\tests.cpp
+	<iostream>
+	<assert.h>
+	"PO-pollard.hpp"
 

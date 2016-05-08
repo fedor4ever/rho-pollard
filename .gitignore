@@ -1,2 +1,5 @@
 obj
 bin
+/doxygen/html
+/doxygen/doxygen.log
+/doxygen/Po-pollard.chm
